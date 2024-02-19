@@ -11,3 +11,4 @@
 * [3.间接跳转与间接调用的处理](my\_reverse\_notes/3.-jian-jie-tiao-zhuan-yu-jian-jie-tiao-yong-de-chu-li.md)
 * [3.栈偏移平衡与计算(使用IDA举例)](my\_reverse\_notes/3.-zhan-pian-yi-ping-heng-yu-ji-suan-shi-yong-ida-ju-li.md)
 * [3.汇总-反编译器中的反汇编](my\_reverse\_notes/3.-hui-zong-fan-bian-yi-qi-zhong-de-fan-hui-bian.md)
+* [补充章节-论文阅读：using-sailr-on-angr-decompiler](my\_reverse\_notes/bu-chong-zhang-jie-lun-wen-yue-du-usingsailronangrdecompiler.md)
