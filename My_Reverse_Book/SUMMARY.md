@@ -12,4 +12,8 @@
 * [3.栈偏移平衡与计算(使用IDA举例)](my\_reverse\_notes/3.-zhan-pian-yi-ping-heng-yu-ji-suan-shi-yong-ida-ju-li.md)
 * [3.汇总-反编译器中的反汇编](my\_reverse\_notes/3.-hui-zong-fan-bian-yi-qi-zhong-de-fan-hui-bian.md)
 * [4.反编译的中间语言设计](my\_reverse\_notes/4.-fan-bian-yi-de-zhong-jian-yu-yan-she-ji.md)
+* [4.调用约定识别-参数与返回值](my\_reverse\_notes/4.-tiao-yong-yue-ding-shi-bie-can-shu-yu-fan-hui-zhi.md)
+* [4.表达式传播与公共子表达式消除（CSE）](my\_reverse\_notes/4.-biao-da-shi-chuan-bo-yu-gong-gong-zi-biao-da-shi-xiao-chu-cse.md)
+* [4.死代码消除、复制传播、常量传播](my\_reverse\_notes/4.-si-dai-ma-xiao-chu-fu-zhi-chuan-bo-chang-liang-chuan-bo.md)
+* [4.窥孔优化(以除法还原示例)](my\_reverse\_notes/4.-kui-kong-you-hua-yi-chu-fa-huan-yuan-shi-li.md)
 * [补充章节-论文阅读：using-sailr-on-angr-decompiler](my\_reverse\_notes/bu-chong-zhang-jie-lun-wen-yue-du-usingsailronangrdecompiler.md)
