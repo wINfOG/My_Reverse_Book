@@ -30,6 +30,10 @@ description: >-
 
 github：[https://github.com/mahaloz](https://github.com/mahaloz)
 
+## "我"的评价
+
+todo
+
 
 
 ## 反编译的控制流还原
@@ -94,7 +98,7 @@ github：[https://github.com/mahaloz](https://github.com/mahaloz)
 
 如图，节点2明显是个if语句的入口，但是他的后继节点3却不被节点2支配；即，可以从节点1 ->节点3  这个路径绕过去;
 
-因此节点3与节点4不被节点2支配，所以违反了SESE(single entry + single exit)的well-define结构化分析规则，所以“钻石形”的cfg无法被还原！
+因此节点3和节点4不被节点2支配，所以违反了SESE(single entry + single exit)的well-define结构化分析规则，所以“钻石形”的cfg无法被还原！
 
 
 
@@ -124,7 +128,7 @@ Dream论文-ndss2015：[https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/ya
 
 
 
-## 论文想讨论的内容
+## 论文主体
 
 首先，论文提出了no-more-goto这篇论文中将所有的goto全部消除这种做法不可取，提出了以下的观点：
 
@@ -136,4 +140,202 @@ Dream论文-ndss2015：[https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/ya
 
 
 
-todo
+## 编译器优化对于控制流的影响
+
+既然导致不可规约控制流产生的主要原因是编译选项，反编译器设计的时候就需要明确，那些编译选项会有这些影响？
+
+论文的测试方法：使用GCC编译器开启O2优化后，分别关掉各个优化选项；使用IDA反编译整个二进制，统计生成goto语句的数量，论文结果如下。
+
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+可以看出，生成goto语句影响较大的编译选项有以下两个：
+
+* A：Jump Threading
+* D：Cross Jumping
+
+
+
+而且，哪怕使用O0进行编译，还是会有goto语句生成。
+
+下面稍微解释一下这些编译选项对于控制流的影响。
+
+### A：Jump Threading
+
+参考wiki：[https://en.wikipedia.org/wiki/Jump\_threading](https://en.wikipedia.org/wiki/Jump\_threading) 中的例子，Jump Threading编译优化方案用于简化条件逻辑，可以有效的减少分支判断次数。由于现代CPU流水线和分支预测的特性，减少分支判断可以显著提升性能。
+
+插入的基本块会影响控制流结构
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### B：Common Subexpression Elimination（CSE）
+
+{% embed url="https://en.wikipedia.org/wiki/Common_subexpression_elimination" %}
+
+参考本书主要章节对于CSE优化的说明，编译器可能会将多条CSE语句压缩到一个块里，然后进行跳转。
+
+### C：Switch Conversion
+
+和上面的CSE类似，只不过条件更为苛刻，对于swich中的赋值语句，编译器可能会通过goto来压缩语句，优化前的示例代码：
+
+```
+switch(a) {
+    case 1:
+        //do-something
+        ret = 100;
+        error = "error";
+        break;
+    case 2:
+        //do-something
+        ret = 100;
+        error = "error";
+        break;
+    .....
+}
+```
+
+优化后，将两个case尾部相同的代码使用goto连接，压缩代码大小。
+
+```
+switch(a) {
+    case 1:
+        //do-something
+        ret = 100;
+        error = "error";
+        goto label;
+    case 2:
+        //do-something
+        label:
+        ret = 100;
+        error = "error";
+        break;
+    .....
+}
+```
+
+
+
+### D：Cross Jumping
+
+参考我[之前的文章](https://bbs.kanxue.com/thread-278789.htm) “为什么IDA F5后的代码会有GOTO语句？” 中的案例
+
+优化前的代码：
+
+```
+int fun(int a, int b)
+{
+    int ret = 0;
+    if (getchar() > 0x10) {
+        ret = a+b;
+    } else {
+        ret = a-b;
+        if (getchar()>0x20) {
+            printf("hello");
+            printf("ret=xx");
+            return ret;
+        }
+    }
+    printf("hi");
+    printf("ret=xx");
+    return ret;
+}
+```
+
+编译器优化中发现， printf("ret=xx");  return ret; 这两句代码完全一致，为了减少代码量就插入一个goto语句将这两个尾部进行融合。优化后插入了goto。
+
+```
+int fun(int a, int b)
+{
+    int ret = 0;
+    if (getchar() > 0x10) {
+        ret = a+b;
+    } else {
+        ret = a-b;
+        if (getchar()>0x20) {
+            printf("hello");
+            goto LABEL
+        }
+    }
+    printf("hi");
+LABEL:
+    printf("ret=xx");
+    return ret;
+}
+
+```
+
+如下图
+
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+### E：Software Thread Cache Reordering
+
+没太读明白，看着意思是在多线程情况下，对于热点代码，通过代码复制增加效率
+
+
+
+### F：Loop Header Optimizations
+
+循环头部提取优化（循环不变优化）
+
+对于循环体内开头不变且不受循环影响的部分，提取到循环体外避免每次都执行，但是如果这部分代码中有跳转，就会导致出现goto语句。
+
+简单代码案例：
+
+```
+for (int i = 0; i < 0x100; i++) {
+    if (g_datas > 0) {
+        break;
+    }
+    ..... // do-something
+}
+```
+
+编译器优化后会将g\_datas 的判断移出来
+
+```
+if (g_datas > 0) {
+    goto label;
+}
+for (int i = 0; i < 0x100; i++) {
+ ..... // do-something
+}
+label:
+```
+
+### G：Builtin Inlining
+
+为了执行效率，编译器会把strcmp memset这种函数用内置的汇编inline掉。因而这部分代码中的判断条件会产生goto语句
+
+### H：Switch Lowering
+
+对于大型switch语句的二分与hash化查找优化，可能会产生goto语句
+
+### I：no-return function
+
+参考主体章节中“递归下降反编译”的内容
+
+exit等这一类函数执行后永远不会返回，编译器也就不再生成后续的代码。
+
+如果反编译器没有正确的识别并传播这类信息，就会导致多加一个边，进而产生反编译问题。
+
+
+
+## 如何判断反编译的结构化分析效果
+
+## 对于不可规约控制流的还原的进一步研究
+
+
+
+### ISD优化
+
+
+
+### ISC优化
+
+
+
+### MISC类型优化
+
+
+
+## 效果展示
