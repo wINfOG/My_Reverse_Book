@@ -146,7 +146,7 @@ Dream论文-ndss2015：[https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/ya
 
 论文的测试方法：使用GCC编译器开启O2优化后，分别关掉各个优化选项；使用IDA反编译整个二进制，统计生成goto语句的数量，论文结果如下。
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 可以看出，生成goto语句影响较大的编译选项有以下两个：
 
@@ -165,7 +165,7 @@ Dream论文-ndss2015：[https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/ya
 
 插入的基本块会影响控制流结构
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 ### B：Common Subexpression Elimination（CSE）
 
@@ -265,7 +265,7 @@ LABEL:
 
 如下图
 
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### E：Software Thread Cache Reordering
 
@@ -322,20 +322,50 @@ exit等这一类函数执行后永远不会返回，编译器也就不再生成�
 
 ## 如何判断反编译的结构化分析效果
 
-## 对于不可规约控制流的还原的进一步研究
+之前的反编译论文中，往往以goto 数量+圈复杂度+代码行数对反结构化分析效果在进行评测。
+
+但是，论文中指出，无论是goto 数量/圈复杂度/代码行，这都是对源码的分析方法，对于二进制的反编译结果并不是那么可靠。
+
+最可靠的方法应当是：默认源代码的可读性是最优的，直接拿编译前的源代码和反编译F5后的结果进行对比。
+
+论文提出了使用GED（Control-Flow Graph Edit Distance）图距离算法（这个指标以前用于二进制的图相似度匹配）但是GED是一个NP-hard问题且开销很高。因此做了一个简化版本的GED算法，我不是算法专家，不做展开。
+
+&#x20;
+
+## 对于不可规约控制流的还原的研究
+
+既然上面的章节提出并整理了编译选项对于控制流的影响，作者提出了三种修改的控制流的场景。分别为
+
+* ISD：Irreducible Statement Duplication（A/E/F）编译器将一个语句扩展成多个语句的场景。
+* ISC：Irreducible Statement Condensing  (B/C/D）编译器将多个语句压缩成单个语句的场景。
+* MISC：不属于上面两类的都算在这里。
+
+### 对抗ISD优化
+
+I
+
+反编译器优化的方式如下图：
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+### 对抗ISC优化
 
 
 
-### ISD优化
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+
+### 其它（MISC）类型优化
 
 
 
-### ISC优化
+反编译器优化的方式如下图：
 
-
-
-### MISC类型优化
-
-
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 ## 效果展示
+
+
+
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+## 结束+讨论
