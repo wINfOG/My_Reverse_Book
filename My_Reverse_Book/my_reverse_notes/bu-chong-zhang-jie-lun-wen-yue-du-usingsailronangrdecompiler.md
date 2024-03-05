@@ -32,7 +32,13 @@ github：[https://github.com/mahaloz](https://github.com/mahaloz)
 
 ## "我"的评价
 
-todo
+我认为，这篇论文的价值不在于它的优化算法，以及和DREAK论文的比较部分。
+
+它的价值在于：
+
+第一：作者从真正逆向工程的角度出发，提出了适用于判断反编译生成CFG结构优劣的标准+算法，即和源码直接比较。之前的算法都是从圈复杂度，goto数量等等源码的判断方法出发，而忽略了可读性这个最重要的指标。
+
+第二：作者详细的分析了编译器的哪些编译优化选项会生成不可规约的CFG图，这是一个比较繁琐的工作。熟悉这些编译选项以及优化方法，对于逆向工程有很大的帮助。
 
 
 
@@ -340,32 +346,45 @@ exit等这一类函数执行后永远不会返回，编译器也就不再生成�
 * ISC：Irreducible Statement Condensing  (B/C/D）编译器将多个语句压缩成单个语句的场景。
 * MISC：不属于上面两类的都算在这里。
 
+这些优化所有的目的都是为了生成更适合人类阅读的控制流图。
+
 ### 对抗ISD优化
 
-I
+ISD：Irreducible Statement Duplication，指的是编译器将一个语句扩展成多个语句的优化场景。
 
-反编译器优化的方式如下图：
+对于反编译器，需要把重复的语句合并掉，来生成更好的控制流图。
+
+反编译器优化案例如下：
 
 <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
+算法步骤概要
+
+* KMP算法，寻找一个CFG中完全重复的两段代码对。
+* 寻找满足要求的代码对，1. 代码对后续存在一个goto语句导致控制流不完整； 2. 它们的后继节点是同一个（中间可以插入其它节点）
+* 将两个重复代码合并成一个节点，判断节点的进出条件，重新组装CFG
+
+
+
 ### 对抗ISC优化
 
+ISC：Irreducible Statement Condensing ，指的是编译器将多个语句压缩成单个语句的优化场景。
 
+反编译器的优化核心是找到合适的需要重复的代码，通过复制CFG的节点来减少最后的不可规约场景。如果一个goto语句的后继节点通过复制可以减少goto 的数量，那就执行优化。
+
+当然，这个优化算法有着明显的性能问题，为了知道拿个边是goto语句，需要先完成至少一轮的结构分析。
 
 <figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 其它（MISC）类型优化
 
-
-
-反编译器优化的方式如下图：
-
-<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+不是主要内容，跳过。
 
 ## 效果展示
 
+可以看到，使用论文中的GED图距离算法对比源码和反编译后的CFG图，SAILR有着明显的优势。
 
+而DREAM的goto-less算法虽然goto的数量没有，但是GED却很高。
 
 <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
-## 结束+讨论
