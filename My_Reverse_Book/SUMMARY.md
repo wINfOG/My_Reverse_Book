@@ -17,6 +17,6 @@
 * [4.死代码消除、复制传播、常量传播](my\_reverse\_notes/4.-si-dai-ma-xiao-chu-fu-zhi-chuan-bo-chang-liang-chuan-bo.md)
 * [4.窥孔优化(以除法还原示例)](my\_reverse\_notes/4.-kui-kong-you-hua-yi-chu-fa-huan-yuan-shi-li.md)
 * [5.类型推导](my\_reverse\_notes/5.-lei-xing-tui-dao.md)
-* [6.控制流还原](my\_reverse\_notes/6.-kong-zhi-liu-huan-yuan.md)
+* [6.控制流还原（1）](my\_reverse\_notes/6.-kong-zhi-liu-huan-yuan-1.md)
 * [7.变量还原（1）变量的机器级表示](my\_reverse\_notes/7.-bian-liang-huan-yuan-1-bian-liang-de-ji-qi-ji-biao-shi.md)
 * [补充章节-论文阅读：using-sailr-on-angr-decompiler](my\_reverse\_notes/bu-chong-zhang-jie-lun-wen-yue-du-usingsailronangrdecompiler.md)
