@@ -19,4 +19,5 @@
 * [5.类型推导](my\_reverse\_notes/5.-lei-xing-tui-dao.md)
 * [6.控制流还原（1）](my\_reverse\_notes/6.-kong-zhi-liu-huan-yuan-1.md)
 * [7.变量还原（1）变量的机器级表示](my\_reverse\_notes/7.-bian-liang-huan-yuan-1-bian-liang-de-ji-qi-ji-biao-shi.md)
+* [深水区热身：高度混淆的还原](my\_reverse\_notes/shen-shui-qu-re-shen-gao-du-hun-xiao-de-huan-yuan.md)
 * [补充章节-论文阅读：using-sailr-on-angr-decompiler](my\_reverse\_notes/bu-chong-zhang-jie-lun-wen-yue-du-usingsailronangrdecompiler.md)
