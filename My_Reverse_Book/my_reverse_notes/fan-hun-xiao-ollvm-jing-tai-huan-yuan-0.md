@@ -42,11 +42,13 @@
 
 <table data-header-hidden><thead><tr><th width="264"></th><th></th></tr></thead><tbody><tr><td>MMAT_ZERO </td><td>microcode does not exist</td></tr><tr><td>MMAT_GENERATED </td><td>generated microcode</td></tr><tr><td>MMAT_PREOPTIMIZED </td><td>preoptimized pass is complete</td></tr><tr><td>MMAT_LOCOPT </td><td><p>local optimization of each basic block is complete.</p><p>control flow graph is ready too.</p></td></tr><tr><td>MMAT_CALLS </td><td>detected call arguments. see also hxe_calls_done</td></tr><tr><td>MMAT_GLBOPT1 </td><td>performed the first pass of global optimization</td></tr><tr><td>MMAT_GLBOPT2 </td><td>most global optimization passes are done</td></tr><tr><td>MMAT_GLBOPT3 </td><td>completed all global optimization. microcode is fixed now.</td></tr><tr><td>MMAT_LVARS </td><td>allocated local variables</td></tr></tbody></table>
 
-
+在这个系列中，我们尽可能的在更高层的中间语言执行优化，也就是说尽可能在IDA的其它优化之后执行优化。这么做的原因是，借用IDA的常量传播等优化功能，可以省去很多复杂的跨basic-block的分析工作。
 
 ## 识别状态变量
 
-使用一种较为朴素的方案：遍历所有的中间语言，查找最多的变量，代码如下：
+使用一种较为朴素的方案：
+
+遍历所有的中间语言，查找最多的用于比较固定值后跳转的变量，代码如下：
 
 ```
 import ida_hexrays
@@ -156,7 +158,7 @@ if __name__ == '__main__':
 
 ```
 
-可以直接在IDA的File -> Script Command 复制黏贴并执行这部分代码，然后在sub\_172BC函数执行F5就能在console中看到输出结果了。
+可以直接在IDA的File -> Script Command 复制黏贴并执行这部分代码，然后在sub\_172BC函数按下F5就能在console中看到输出结果了。
 
 ```
 Compare variable=%var_91.1 times=1
@@ -169,4 +171,5 @@ Compare variable=w8.4 times=43
 
 因此，w8.4  w9.1 w10.4 这三个变量的使用此时明显超过了正常的情况，很有可能是状态变量。
 
-可以在lucid的输出结果中与汇编进行对比，确认情况
+可以在lucid的输出结果中与汇编进行对比。
+
