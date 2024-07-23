@@ -38,9 +38,57 @@
 
 当然，还有另一种识别方法，在MMAT\_PREOPTIMIZED 级别优化后，IDA再每个块提供了的def-undef-use关系，可以直接判断块中的这个关系来进行分类。
 
+关键代码有下面两部分，第一部分是通过任意一个mba可以遍历所有的basic-block
 
+```
+current_block = mba.get_mblock(0)
+i = 0
 
+# 既然获得了状态变量，通过对于状态变量的操作给块作记号（因为没有精确到block的instruction能力）
+all_block_status = {}
 
+while current_block.nextb != None:
+    current_block: mblock_t = mba.get_mblock(i)
+    # print(f"block-visitor: {hex(current_block.start)} - {hex(current_block.end)}")
+    block_kind = check_block(current_block)
+    # 通过block的define-use判断block的形态
+    all_block_status[current_block] = block_kind
+    i += 1
+```
+
+check\_block 函数的通过对于状态变量的def-undef-use关系，对block进行分类
+
+注意，为了方便判断，这里写死了在bit-map中作为状态变量伪寄存器的bit号=72，完整的代码参考（todo需要完整的参考代码）
+
+```
+def check_block(one_block, reg_bit_value = 72) -> int:
+    must_use = one_block.mustbuse
+    may_use = one_block.maybuse
+    must_def = one_block.mustbdef
+    may_def = one_block.maybdef
+
+    use_reg = False
+    define_reg = False
+    if must_use.reg.has(reg_bit_value) or may_use.reg.has(reg_bit_value):
+        use_reg = True
+
+    if must_def.reg.has(reg_bit_value) or may_def.reg.has(reg_bit_value):
+        define_reg = True
+
+    if use_reg and (not define_reg):
+        # 使用但是不定义，这是分发块
+        print(f"dispatch-block: {hex(one_block.start)} - {hex(one_block.end)}")
+        return 2
+    elif define_reg:
+        # 定义了，要不是真实块，要不是头部块
+        print(f"real-block: {hex(one_block.start)} - {hex(one_block.end)}")
+        return 1
+    else:
+        print(f"unknown-block: {hex(one_block.start)} - {hex(one_block.end)}")
+    return 0
+```
+
+当然，有的block既没有使用(must-use/may-use)，也没有定义(define/redefine)状态变量；我们需要仔细的判断OLLVM混淆的具体场景；在这个混淆的技术中，只要区分好分发块和真实块的边界就没问题了。
 
 ## 真实块中状态变量的值
 
