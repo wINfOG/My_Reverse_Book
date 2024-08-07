@@ -19,6 +19,7 @@
 * [5.类型推导](my\_reverse\_notes/5.-lei-xing-tui-dao.md)
 * [6.控制流还原（1）](my\_reverse\_notes/6.-kong-zhi-liu-huan-yuan-1.md)
 * [7.变量还原（1）变量的机器级表示](my\_reverse\_notes/7.-bian-liang-huan-yuan-1-bian-liang-de-ji-qi-ji-biao-shi.md)
+* [7.变量还原（2）从指令到变量-IDA为例](my\_reverse\_notes/7.-bian-liang-huan-yuan-2-cong-zhi-ling-dao-bian-liang-ida-wei-li.md)
 * [深水区热身：高度混淆的还原](my\_reverse\_notes/shen-shui-qu-re-shen-gao-du-hun-xiao-de-huan-yuan.md)
 * [反混淆: OLLVM静态还原-0](my\_reverse\_notes/fan-hun-xiao-ollvm-jing-tai-huan-yuan-0.md)
 * [反混淆: OLLVM静态还原-1](my\_reverse\_notes/fan-hun-xiao-ollvm-jing-tai-huan-yuan-1.md)
