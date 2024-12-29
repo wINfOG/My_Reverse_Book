@@ -24,6 +24,7 @@
 * [10. 案例分析-JAXD-1](my_reverse_notes/10.-an-li-fen-xi-jaxd1.md)
 * [10. 案例分析-Ghidra-0](my_reverse_notes/10.-an-li-fen-xi-ghidra0.md)
 * [浅水区玩耍：动静态结合与轻度混淆还原](my_reverse_notes/qian-shui-qu-wan-shua-dong-jing-tai-jie-he-yu-qing-du-hun-xiao-huan-yuan.md)
+* [反混淆：花指令/间接跳转](my_reverse_notes/fan-hun-xiao-hua-zhi-ling-jian-jie-tiao-zhuan.md)
 * [深水区热身：高度混淆的还原](my_reverse_notes/shen-shui-qu-re-shen-gao-du-hun-xiao-de-huan-yuan.md)
 * [反混淆: OLLVM静态还原-0](my_reverse_notes/fan-hun-xiao-ollvm-jing-tai-huan-yuan-0.md)
 * [反混淆: OLLVM静态还原-1](my_reverse_notes/fan-hun-xiao-ollvm-jing-tai-huan-yuan-1.md)
