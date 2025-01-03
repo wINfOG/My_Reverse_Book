@@ -29,4 +29,5 @@
 * [深水区热身：高度混淆的还原](my_reverse_notes/shen-shui-qu-re-shen-gao-du-hun-xiao-de-huan-yuan.md)
 * [反混淆: OLLVM静态还原-0](my_reverse_notes/fan-hun-xiao-ollvm-jing-tai-huan-yuan-0.md)
 * [反混淆: OLLVM静态还原-1](my_reverse_notes/fan-hun-xiao-ollvm-jing-tai-huan-yuan-1.md)
+* [反混淆：VMP的对抗-0](my_reverse_notes/fan-hun-xiao-vmp-de-dui-kang-0.md)
 * [补充章节-论文阅读：using-sailr-on-angr-decompiler](my_reverse_notes/bu-chong-zhang-jie-lun-wen-yue-du-usingsailronangrdecompiler.md)
