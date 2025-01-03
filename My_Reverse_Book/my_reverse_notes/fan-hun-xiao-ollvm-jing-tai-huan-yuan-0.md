@@ -74,11 +74,11 @@
 
 在MMAT\_LOCOPT优化层，中间语言长这样，和汇编的意思差不多：
 
-<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 但是MMAT\_CALLS 优化层，由于执行了常量传播+替换，w11和w12直接被替换成了常量，因此就可以直接看出来是状态变量的比较操作了。
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 所以这个反混淆优化的层次，最少要在MMAT\_CALLS之上实现，
 

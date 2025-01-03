@@ -124,7 +124,7 @@ github：[https://github.com/mahaloz](https://github.com/mahaloz)
 
 ## 补充：Dream论文的goto-less方案
 
-Dream论文-ndss2015：[https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/yakdan/dream\_ndss2015.pdf](https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/yakdan/dream\_ndss2015.pdf)
+Dream论文-ndss2015：[https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/yakdan/dream\_ndss2015.pdf](https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/yakdan/dream_ndss2015.pdf)
 
 这篇论文的贡献是，相比于传统的“结构化分析”技术，论文提出了一种完全不同的方法。
 
@@ -152,7 +152,7 @@ Dream论文-ndss2015：[https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/ya
 
 论文的测试方法：使用GCC编译器开启O2优化后，分别关掉各个优化选项；使用IDA反编译整个二进制，统计生成goto语句的数量，论文结果如下。
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 可以看出，生成goto语句影响较大的编译选项有以下两个：
 
@@ -167,7 +167,7 @@ Dream论文-ndss2015：[https://net.cs.uni-bonn.de/fileadmin/ag/martini/Staff/ya
 
 ### A：Jump Threading
 
-参考wiki：[https://en.wikipedia.org/wiki/Jump\_threading](https://en.wikipedia.org/wiki/Jump\_threading) 中的例子，Jump Threading编译优化方案用于简化条件逻辑，可以有效的减少分支判断次数。由于现代CPU流水线和分支预测的特性，减少分支判断可以显著提升性能。
+参考wiki：[https://en.wikipedia.org/wiki/Jump\_threading](https://en.wikipedia.org/wiki/Jump_threading) 中的例子，Jump Threading编译优化方案用于简化条件逻辑，可以有效的减少分支判断次数。由于现代CPU流水线和分支预测的特性，减少分支判断可以显著提升性能。
 
 插入的基本块会影响控制流结构
 
@@ -271,7 +271,7 @@ LABEL:
 
 如下图
 
-<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### E：Software Thread Cache Reordering
 
@@ -374,7 +374,7 @@ ISC：Irreducible Statement Condensing ，指的是编译器将多个语句压�
 
 当然，这个优化算法有着明显的性能问题，为了知道拿个边是goto语句，需要先完成至少一轮的结构分析。
 
-<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ### 其它（MISC）类型优化
 
@@ -386,5 +386,5 @@ ISC：Irreducible Statement Condensing ，指的是编译器将多个语句压�
 
 而DREAM的goto-less算法虽然goto的数量没有，但是GED却很高。
 
-<figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
