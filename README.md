@@ -8,7 +8,13 @@ todo：施工中，框架完成，补充案例中；承诺群友争取2025年写
 
 # 在线阅读
 
+本体
+
 https://tommy-3.gitbook.io/my_reverse_book/
+
+实践章节
+
+https://tommy-3.gitbook.io/my_reverse_book/my_obfuscation_book
 
 # 项目目录
 
@@ -76,6 +82,8 @@ A Compiler-Aware Structuring Algorithm for Binary Decompilation"](https://www.zi
 # 实践章节
 
 实践章节，以及对抗现代化高强度混淆的技术，过于庞大了，因此移动到了另外一本书中：
+
+https://tommy-3.gitbook.io/my_reverse_book/my_obfuscation_book
 
 
 
