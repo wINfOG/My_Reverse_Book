@@ -8,15 +8,15 @@ todo：施工中，框架完成，补充案例中；承诺群友争取2025年写
 
 # 在线阅读
 
-本体
+本体在线阅读
 
 https://tommy-3.gitbook.io/my_reverse_book/
 
-实践章节
+后续：混淆与对抗章节
 
 https://tommy-3.gitbook.io/my_reverse_book/my_obfuscation_book
 
-# 项目目录
+# 目录
 
 ## 第一章
 
@@ -48,7 +48,7 @@ https://tommy-3.gitbook.io/my_reverse_book/my_obfuscation_book
 
 ## 第六章
 
-反编译器的类型系统还原技术(typing),
+反编译器的类型系统还原技术(typing), 还原类型数据+结构体等高级语意。
 
 ## 第七章
 
@@ -77,7 +77,9 @@ A Compiler-Aware Structuring Algorithm for Binary Decompilation"](https://www.zi
 
 计划更新:
 
-.. todo
+NDSS 2105:["No More Gotos: Decompilation Using Pattern-Independent Control-Flow Structuring and Semantics-Preserving Transformations"](https://www.ndss-symposium.org/ndss2015/ndss-2015-programme/no-more-gotos-decompilation-using-pattern-independent-control-flow-structuring-and-semantics/)
+
+.. todo：DCC相关 Ghidra相关
 
 # 实践章节
 
