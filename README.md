@@ -1,4 +1,4 @@
-# 我理想的反编译书籍
+# 我理想的反编译书籍（施工中）
 
 因为是理想，所以永远不可能达成。
 
@@ -16,6 +16,10 @@ https://tommy-3.gitbook.io/my_reverse_book/
 
 https://tommy-3.gitbook.io/my_reverse_book/my_obfuscation_book
 
+# 介绍
+
+
+
 # 目录
 
 ## 第一章
@@ -28,9 +32,9 @@ https://tommy-3.gitbook.io/my_reverse_book/my_obfuscation_book
 
 ## 第二章
 
-反编译技术发展历史、通用反编译器架构；
+反编译技术发展历史、通用反编译器架构；为什么反编译器最终变成了现在这个样子？
 
-关键技术概览和反编译整体流程简述。
+以及，关键技术概览和反编译整体流程简述。
 
 ## 第三章
 
@@ -52,7 +56,9 @@ https://tommy-3.gitbook.io/my_reverse_book/my_obfuscation_book
 
 ## 第七章
 
-现代反编译技术+查漏补缺
+变量还原，反编译技术如何还原出适合人类阅读的变量。
+
+以及，现代反编译技术与各种查漏补缺
 
 ## 第八章
 
@@ -83,7 +89,9 @@ NDSS 2105:["No More Gotos: Decompilation Using Pattern-Independent Control-Flow 
 
 # 实践章节
 
-实践章节，以及对抗现代化高强度混淆的技术，过于庞大了，因此移动到了另外一本书中：
+实践章节，主要是对抗现代化高强度混淆的技术；例如OLLVM/VMP等商业化保护技术，
+
+这个部分过于庞大了，因此移动到了另外一本书中：
 
 https://tommy-3.gitbook.io/my_reverse_book/my_obfuscation_book
 
