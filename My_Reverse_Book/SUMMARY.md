@@ -21,6 +21,7 @@
 * [6.控制流还原：新方法](my_reverse_notes/6.-kong-zhi-liu-huan-yuan-xin-fang-fa.md)
 * [7.变量还原：变量的机器级表示](my_reverse_notes/7.-bian-liang-huan-yuan-bian-liang-de-ji-qi-ji-biao-shi.md)
 * [7.变量还原：寄存器分配与还原](my_reverse_notes/7.-bian-liang-huan-yuan-ji-cun-qi-fen-pei-yu-huan-yuan.md)
+* [7. 变量还原：反编译与还原](my_reverse_notes/7.-bian-liang-huan-yuan-fan-bian-yi-yu-huan-yuan.md)
 * [8. 案例分析：说明](my_reverse_notes/8.-an-li-fen-xi-shuo-ming.md)
 * [8. 案例分析：JAXD-1](my_reverse_notes/8.-an-li-fen-xi-jaxd1.md)
 * [8. 案例分析：Ghidra-0](my_reverse_notes/8.-an-li-fen-xi-ghidra0.md)
